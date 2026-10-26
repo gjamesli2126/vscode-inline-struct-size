@@ -1,0 +1,111 @@
+{
+  "name": "inline-struct-size",
+  "displayName": "Inline Struct Size",
+  "description": "Shows IntelliSense-computed C/C++ struct, union, and class sizes inline.",
+  "version": "0.1.0",
+  "publisher": "local",
+  "private": true,
+  "license": "UNLICENSED",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gjamesli2126/vscode-inline-struct-size.git"
+  },
+  "bugs": {
+    "url": "https://github.com/gjamesli2126/vscode-inline-struct-size/issues"
+  },
+  "homepage": "https://github.com/gjamesli2126/vscode-inline-struct-size#readme",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Programming Languages",
+    "Other"
+  ],
+  "keywords": [
+    "c",
+    "cpp",
+    "struct",
+    "union",
+    "class",
+    "sizeof",
+    "inline",
+    "intellisense"
+  ],
+  "activationEvents": [
+    "onLanguage:c",
+    "onLanguage:cpp",
+    "onLanguage:cuda-cpp",
+    "onCommand:inlineStructSize.refresh"
+  ],
+  "main": "./extension.js",
+  "extensionKind": [
+    "workspace"
+  ],
+  "extensionDependencies": [
+    "ms-vscode.cpptools"
+  ],
+  "capabilities": {
+    "untrustedWorkspaces": {
+      "supported": false,
+      "description": "This extension depends on the Microsoft C/C++ IntelliSense extension, which requires a trusted workspace."
+    },
+    "virtualWorkspaces": {
+      "supported": false,
+      "description": "This extension depends on the workspace-hosted Microsoft C/C++ IntelliSense extension."
+    }
+  },
+  "contributes": {
+    "commands": [
+      {
+        "command": "inlineStructSize.refresh",
+        "title": "Inline Struct Size: Refresh",
+        "category": "Inline Struct Size"
+      }
+    ],
+    "configuration": {
+      "title": "Inline Struct Size",
+      "properties": {
+        "inlineStructSize.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show inline size decorations for explicit struct, union, and class references.",
+          "scope": "resource"
+        },
+        "inlineStructSize.showAlignment": {
+          "type": "boolean",
+          "default": true,
+          "description": "Include the IntelliSense-computed alignment in each decoration.",
+          "scope": "resource"
+        },
+        "inlineStructSize.debounceMs": {
+          "type": "number",
+          "default": 350,
+          "minimum": 0,
+          "maximum": 5000,
+          "description": "Delay before refreshing decorations after editor changes.",
+          "scope": "resource"
+        },
+        "inlineStructSize.maxReferences": {
+          "type": "number",
+          "default": 60,
+          "minimum": 1,
+          "maximum": 500,
+          "description": "Maximum number of visible type references queried per refresh.",
+          "scope": "resource"
+        },
+        "inlineStructSize.queryConcurrency": {
+          "type": "number",
+          "default": 4,
+          "minimum": 1,
+          "maximum": 16,
+          "description": "Maximum number of simultaneous IntelliSense hover requests.",
+          "scope": "resource"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "test": "node --test",
+    "check": "node --check extension.js && node --check lib/layout.js"
+  }
+}
